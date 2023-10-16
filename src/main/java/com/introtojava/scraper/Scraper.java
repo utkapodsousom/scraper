@@ -30,18 +30,37 @@ public class Scraper {
 		String dirName = String.valueOf(timeInMillis + hash);
 
 		String currentDir = createDirectory(dirName).getAbsolutePath();
-		
+		createFile(currentDir, "index.html");
+
 	}
 
 	public static File createDirectory(String name) throws IOException {
 		File dirPath = new File(System.getProperty("user.dir") + separatorChar + name);
 		try {
-			dirPath.mkdir();
-			System.out.println("Created new directory: " + name);
+			if (dirPath.mkdir()) {
+				System.out.println("Created new directory: " + name);
+			} else {
+				System.out.println("Directory already exists");
+			}
 		} catch (Exception e) {
-				System.out.println("Couldn't create directory: " + e.getMessage());
+			System.out.println("Couldn't create directory: " + e.getMessage());
 		}
 
 		return dirPath;
+	}
+
+	public static File createFile(String path, String name) throws IOException {
+		File filePath = new File(path + separatorChar + name);
+		try {
+			if (filePath.createNewFile()) {
+				System.out.println("Created new file: " + name);
+			} else {
+				System.out.println("File already exists");
+			}
+		} catch (IOException e) {
+			System.out.println("Couldn't create file: " + e.getMessage());
+		}
+
+		return filePath;
 	}
 }
