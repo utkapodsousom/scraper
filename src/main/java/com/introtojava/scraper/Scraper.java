@@ -2,7 +2,6 @@ package com.introtojava.scraper;
 
 import java.io.File;
 import static java.io.File.separatorChar;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -31,10 +30,7 @@ public class Scraper {
 		String dirName = String.valueOf(timeInMillis + hash);
 
 		String currentDir = createDirectory(dirName).getAbsolutePath();
-		File index = new File(currentDir + separatorChar + "index.html");
-		try (FileWriter writer = new FileWriter(index)) {
-			writer.write(html.outerHtml());
-		}
+		createFile(currentDir, "index.html");
 
 	}
 
