@@ -1,13 +1,18 @@
 package com.introtojava.scraper;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import static java.io.File.separatorChar;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Scanner;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  *
@@ -19,10 +24,10 @@ public class Scraper {
 		// get site url from user
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter site url: ");
-		String siteUrl = input.nextLine();
+		String siteUrl = input.nextLine().trim().toLowerCase();
 
 		// get html and create directory and file
-		Document html = Jsoup.connect(siteUrl.trim().toLowerCase()).get();
+		Document html = Jsoup.connect(siteUrl).get();
 
 		//generate dir name
 		Calendar cal = Calendar.getInstance();
@@ -30,40 +35,44 @@ public class Scraper {
 		int hash = html.title().hashCode();
 		String dirName = String.valueOf(timeInMillis + hash);
 
-		String currentDir = createDirectory(dirName).getAbsolutePath();
-		File index = new File(currentDir + separatorChar + "index.html");	
+		File mainDir = new File(dirName);
+		mainDir.mkdir();
+		File index = new File(mainDir.getAbsolutePath() + separatorChar + "index.html");
 		FileWriter writer = new FileWriter(index);
 		writer.write(html.outerHtml());
 
-	}
-
-	public static File createDirectory(String name) throws IOException {
-		File dirPath = new File(System.getProperty("user.dir") + separatorChar + name);
-		try {
-			if (dirPath.mkdir()) {
-				System.out.println("Created new directory: " + name);
-			} else {
-				System.out.println("Directory already exists");
+		Document doc = Jsoup.parse(index, "UTF-8", siteUrl);
+		Elements els = doc.getAllElements();
+		for (Element el : els) {
+			switch (el.normalName()) {
+				case "link" -> {
+					if (el.attr("rel").equals("stylesheet")) {
+						String[] urlParts = el.attr("href").split("/");
+						String fileName = urlParts[urlParts.length - 1];
+						fileName = fileName.contains("?") ? fileName.substring(0, fileName.indexOf("?")) : fileName;
+						File stylesDir = new File(mainDir, "styles");
+						if (stylesDir.mkdir()) {
+							System.out.println("Created directory for styles");
+						}
+						File cssFile = new File(stylesDir, fileName);
+						try (
+							BufferedInputStream in = new BufferedInputStream(new URL(el.absUrl("href")).openStream()); FileOutputStream fileOutputStream = new FileOutputStream(cssFile);) {
+							byte dataBuffer[] = new byte[1024];
+							int bytesRead;
+							while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+								fileOutputStream.write(dataBuffer, 0, bytesRead);
+							}
+						} catch (IOException e) {
+							System.out.println("Error writing buffer: " + e.getMessage());
+						}
+					}
+				}
+				default -> {
+					continue;
+				}
 			}
-		} catch (Exception e) {
-			System.out.println("Couldn't create directory: " + e.getMessage());
 		}
 
-		return dirPath;
 	}
 
-	public static File createFile(String path, String name) throws IOException {
-		File filePath = new File(path + separatorChar + name);
-		try {
-			if (filePath.createNewFile()) {
-				System.out.println("Created new file: " + name);
-			} else {
-				System.out.println("File already exists");
-			}
-		} catch (IOException e) {
-			System.out.println("Couldn't create file: " + e.getMessage());
-		}
-
-		return filePath;
-	}
 }
