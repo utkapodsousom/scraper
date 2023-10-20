@@ -48,8 +48,11 @@ public class Scraper {
 		for (Element el : els) {
 			switch (el.normalName()) {
 				case "link" -> {
-					if (el.attr("rel").equals("stylesheet")) {
 						String fileName = getFileName(el);
+					if (el.attr("rel").equals("stylesheet")) {
+						if (el.attr("href").contains("fonts")) {
+							continue;
+						}
 						File stylesDir = new File(mainDir, "styles");
 						if (stylesDir.mkdir()) {
 							System.out.println("Created directory for styles");
@@ -57,6 +60,10 @@ public class Scraper {
 						File cssFile = new File(stylesDir, fileName);
 						writeFile(el, cssFile);
 						el.attr("href", "styles" + separatorChar + fileName);
+					} else if (el.absUrl("rel").contains("icon")) {
+						File icon = new File(mainDir, fileName);
+						writeFile(el, icon);
+						el.attr("href", fileName);
 					}
 				}
 				default -> {
