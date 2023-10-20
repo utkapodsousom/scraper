@@ -41,38 +41,54 @@ public class Scraper {
 		FileWriter writer = new FileWriter(index);
 		writer.write(html.outerHtml());
 
+		StringBuilder sb = new StringBuilder();
+
 		Document doc = Jsoup.parse(index, "UTF-8", siteUrl);
 		Elements els = doc.getAllElements();
 		for (Element el : els) {
 			switch (el.normalName()) {
 				case "link" -> {
 					if (el.attr("rel").equals("stylesheet")) {
-						String[] urlParts = el.attr("href").split("/");
-						String fileName = urlParts[urlParts.length - 1];
-						fileName = fileName.contains("?") ? fileName.substring(0, fileName.indexOf("?")) : fileName;
+						String fileName = getFileName(el);
 						File stylesDir = new File(mainDir, "styles");
 						if (stylesDir.mkdir()) {
 							System.out.println("Created directory for styles");
 						}
 						File cssFile = new File(stylesDir, fileName);
-						try (
-							BufferedInputStream in = new BufferedInputStream(new URL(el.absUrl("href")).openStream()); FileOutputStream fileOutputStream = new FileOutputStream(cssFile);) {
-							byte dataBuffer[] = new byte[1024];
-							int bytesRead;
-							while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
-								fileOutputStream.write(dataBuffer, 0, bytesRead);
-							}
-						} catch (IOException e) {
-							System.out.println("Error writing buffer: " + e.getMessage());
-						}
+						writeFile(el, cssFile);
+						el.attr("href", "styles" + separatorChar + fileName);
 					}
 				}
 				default -> {
 					continue;
 				}
 			}
+
+			sb.append(el.outerHtml());
 		}
 
+		System.out.println(sb.toString());
+
+	}
+
+	public static String getFileName(Element el) {
+		String[] urlParts = el.attr("href").split("/");
+		String fileName = urlParts[urlParts.length - 1];
+		fileName = fileName.contains("?") ? fileName.substring(0, fileName.indexOf("?")) : fileName;
+		return fileName;
+	}
+
+	public static void writeFile(Element el, File file) throws IOException {
+		try (
+			BufferedInputStream in = new BufferedInputStream(new URL(el.absUrl("href")).openStream()); FileOutputStream fileOutputStream = new FileOutputStream(file);) {
+			byte dataBuffer[] = new byte[1024];
+			int bytesRead;
+			while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+				fileOutputStream.write(dataBuffer, 0, bytesRead);
+			}
+		} catch (IOException e) {
+			System.out.println("Error writing buffer: " + e.getMessage());
+		}
 	}
 
 }
