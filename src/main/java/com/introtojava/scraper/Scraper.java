@@ -45,12 +45,14 @@ public class Scraper {
 
 		Document doc = Jsoup.parse(index, "UTF-8", siteUrl);
 		Elements els = doc.getAllElements();
+		String attrType = "";
 		for (Element el : els) {
 			switch (el.normalName()) {
 				case "link" -> {
-						String fileName = getFileName(el);
+					attrType = "href";
+					String fileName = getFileName(el, attrType);
 					if (el.attr("rel").equals("stylesheet")) {
-						if (el.attr("href").contains("fonts")) {
+						if (el.attr(attrType).contains("fonts")) {
 							continue;
 						}
 						File stylesDir = new File(mainDir, "styles");
@@ -58,13 +60,27 @@ public class Scraper {
 							System.out.println("Created directory for styles");
 						}
 						File cssFile = new File(stylesDir, fileName);
-						writeFile(el, cssFile);
-						el.attr("href", "styles" + separatorChar + fileName);
+						writeFile(el, cssFile, attrType);
+						el.attr(attrType, "styles" + separatorChar + fileName);
 					} else if (el.absUrl("rel").contains("icon")) {
 						File icon = new File(mainDir, fileName);
-						writeFile(el, icon);
-						el.attr("href", fileName);
+						writeFile(el, icon, attrType);
+						el.attr(attrType, fileName);
 					}
+				}
+				case "img" -> {
+					attrType = "src";	
+					String fileName = getFileName(el, attrType);
+					if (el.attr(attrType).contains("base64")) {
+						continue;
+					}
+					File imgDir = new File(mainDir, "images");
+					if (imgDir.mkdir()) {
+						System.out.println("Created directory for images");
+					}
+					File image = new File(imgDir, fileName);
+					writeFile(el, image, attrType);
+					el.attr(attrType, "images" +separatorChar + fileName);
 				}
 				default -> {
 					continue;
@@ -78,16 +94,16 @@ public class Scraper {
 
 	}
 
-	public static String getFileName(Element el) {
-		String[] urlParts = el.attr("href").split("/");
+	public static String getFileName(Element el, String attr) {
+		String[] urlParts = el.attr(attr).split("/");
 		String fileName = urlParts[urlParts.length - 1];
 		fileName = fileName.contains("?") ? fileName.substring(0, fileName.indexOf("?")) : fileName;
 		return fileName;
 	}
 
-	public static void writeFile(Element el, File file) throws IOException {
+	public static void writeFile(Element el, File file, String attr) throws IOException {
 		try (
-			BufferedInputStream in = new BufferedInputStream(new URL(el.absUrl("href")).openStream()); FileOutputStream fileOutputStream = new FileOutputStream(file);) {
+			BufferedInputStream in = new BufferedInputStream(new URL(el.absUrl(attr)).openStream()); FileOutputStream fileOutputStream = new FileOutputStream(file);) {
 			byte dataBuffer[] = new byte[1024];
 			int bytesRead;
 			while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
