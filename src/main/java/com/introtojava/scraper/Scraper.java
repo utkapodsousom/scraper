@@ -6,7 +6,8 @@ import static java.io.File.separatorChar;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.Scanner;
 import org.jsoup.Jsoup;
@@ -20,7 +21,7 @@ import org.jsoup.select.Elements;
  */
 public class Scraper {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, URISyntaxException {
 		// get site url from user
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter site url: ");
@@ -69,7 +70,7 @@ public class Scraper {
 					}
 				}
 				case "img" -> {
-					attrType = "src";	
+					attrType = "src";
 					String fileName = getFileName(el, attrType);
 					if (el.attr(attrType).contains("base64")) {
 						continue;
@@ -80,8 +81,9 @@ public class Scraper {
 					}
 					File image = new File(imgDir, fileName);
 					writeFile(el, image, attrType);
-					el.attr(attrType, "images" +separatorChar + fileName);
+					el.attr(attrType, "images" + separatorChar + fileName);
 				}
+
 				default -> {
 					continue;
 				}
@@ -101,16 +103,22 @@ public class Scraper {
 		return fileName;
 	}
 
-	public static void writeFile(Element el, File file, String attr) throws IOException {
+	public static void writeFile(Element el, File file, String attr) throws IOException, URISyntaxException {
 		try (
-			BufferedInputStream in = new BufferedInputStream(new URL(el.absUrl(attr)).openStream()); FileOutputStream fileOutputStream = new FileOutputStream(file);) {
+			BufferedInputStream in = new BufferedInputStream(new URI(el.absUrl(attr)).toURL().openStream()); FileOutputStream fileOutputStream = new FileOutputStream(file);) {
 			byte dataBuffer[] = new byte[1024];
 			int bytesRead;
 			while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
 				fileOutputStream.write(dataBuffer, 0, bytesRead);
 			}
-		} catch (IOException e) {
-			System.out.println("Error writing buffer: " + e.getMessage());
+		} catch (Exception e) {
+			if (e instanceof IOException) {
+				System.out.println("Error writing buffer: " + e.getMessage());
+			} else if (e instanceof URISyntaxException) {
+				System.out.println("Invalid URI: " + e.getMessage());
+			} else {
+				System.out.println("Unknown error: " + e.getMessage());
+			}
 		}
 	}
 
