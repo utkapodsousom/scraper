@@ -30,7 +30,7 @@ public class Scraper {
 		// get html and create directory and file
 		Document html = Jsoup.connect(siteUrl).get();
 
-		//generate dir name
+		// generate dir name
 		Calendar cal = Calendar.getInstance();
 		long timeInMillis = cal.getTimeInMillis();
 		int hash = html.title().hashCode();
@@ -42,7 +42,7 @@ public class Scraper {
 		FileWriter writer = new FileWriter(index);
 		writer.write(html.outerHtml());
 
-		StringBuilder sb = new StringBuilder();
+		StringBuilder newHtml = new StringBuilder();
 
 		Document doc = Jsoup.parse(index, "UTF-8", siteUrl);
 		Elements els = doc.getAllElements();
@@ -51,7 +51,7 @@ public class Scraper {
 			switch (el.normalName()) {
 				case "link" -> {
 					attrType = "href";
-					String fileName = getFileName(el, attrType);
+					String fileName = getFileName(el.attr(attrType));
 					if (el.attr("rel").equals("stylesheet")) {
 						if (el.attr(attrType).contains("fonts")) {
 							continue;
@@ -61,27 +61,49 @@ public class Scraper {
 							System.out.println("Created directory for styles");
 						}
 						File cssFile = new File(stylesDir, fileName);
-						writeFile(el, cssFile, attrType);
+						writeFile(el.absUrl(attrType), cssFile);
 						el.attr(attrType, "styles" + separatorChar + fileName);
 					} else if (el.absUrl("rel").contains("icon")) {
 						File icon = new File(mainDir, fileName);
-						writeFile(el, icon, attrType);
+						writeFile(el.absUrl(attrType), icon);
 						el.attr(attrType, fileName);
 					}
 				}
 				case "img" -> {
 					attrType = "src";
-					String fileName = getFileName(el, attrType);
-					if (el.attr(attrType).contains("base64")) {
+					if (el.attr(attrType).isBlank()
+					    || el.attr(attrType).contains("base64")) {
 						continue;
 					}
+					StringBuilder srcsetString = new StringBuilder();
+					String fileName = getFileName(el.attr(attrType));
 					File imgDir = new File(mainDir, "images");
 					if (imgDir.mkdir()) {
 						System.out.println("Created directory for images");
 					}
 					File image = new File(imgDir, fileName);
-					writeFile(el, image, attrType);
+					writeFile(el.absUrl(attrType), image);
 					el.attr(attrType, "images" + separatorChar + fileName);
+					// TODO: srcset job for <source> tag
+					if (el.hasAttr("srcset")) {
+						String[] srcset = el.attr("srcset").split(",");
+						for (String set : srcset) {
+							String screenWidth = "";
+							if (set.trim().split(" ").length > 1) {
+								screenWidth = set.trim().split(" ")[1];
+							}
+							String setURL = set.trim().split(" ")[0];
+							fileName = getFileName(setURL);
+							image = new File(imgDir, fileName);
+							if (el.attr("srcset").contains("https")) {
+								writeFile(setURL, image);
+							} else {
+								writeFile(siteUrl + separatorChar + setURL, image);
+							}
+							srcsetString.append("images").append(separatorChar).append(fileName).append(" ").append(screenWidth).append(",");
+						}
+						el.attr("srcset", srcsetString.toString());
+					}
 				}
 
 				default -> {
@@ -89,23 +111,23 @@ public class Scraper {
 				}
 			}
 
-			sb.append(el.outerHtml());
+			newHtml.append(el.outerHtml());
 		}
 
-		System.out.println(sb.toString());
+		System.out.println(newHtml.toString());
 
 	}
 
-	public static String getFileName(Element el, String attr) {
-		String[] urlParts = el.attr(attr).split("/");
+	public static String getFileName(String url) {
+		String[] urlParts = url.split("/");
 		String fileName = urlParts[urlParts.length - 1];
 		fileName = fileName.contains("?") ? fileName.substring(0, fileName.indexOf("?")) : fileName;
 		return fileName;
 	}
 
-	public static void writeFile(Element el, File file, String attr) throws IOException, URISyntaxException {
+	public static void writeFile(String url, File file) throws IOException, URISyntaxException {
 		try (
-			BufferedInputStream in = new BufferedInputStream(new URI(el.absUrl(attr)).toURL().openStream()); FileOutputStream fileOutputStream = new FileOutputStream(file);) {
+		    BufferedInputStream in = new BufferedInputStream(new URI(url).toURL().openStream()); FileOutputStream fileOutputStream = new FileOutputStream(file);) {
 			byte dataBuffer[] = new byte[1024];
 			int bytesRead;
 			while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
