@@ -86,7 +86,8 @@ public class Scraper {
 					el.attr(attrType, "images" + separatorChar + fileName);
 					// TODO: srcset job for <source> tag
 					if (el.hasAttr("srcset")) {
-						String[] srcset = el.attr("srcset").split(",");
+						attrType = "srcset";
+						String[] srcset = el.attr(attrType).split(",");
 						for (String set : srcset) {
 							String screenWidth = "";
 							if (set.trim().split(" ").length > 1) {
@@ -95,15 +96,56 @@ public class Scraper {
 							String setURL = set.trim().split(" ")[0];
 							fileName = getFileName(setURL);
 							image = new File(imgDir, fileName);
-							if (el.attr("srcset").contains("https")) {
+							if (el.attr(attrType).contains("https")) {
 								writeFile(setURL, image);
+							} else if (el.attr(attrType).startsWith("//")) {
+								writeFile("https:" + setURL, image);
 							} else {
 								writeFile(siteUrl + separatorChar + setURL, image);
 							}
-							srcsetString.append("images").append(separatorChar).append(fileName).append(" ").append(screenWidth).append(",");
+							srcsetString.append("images")
+							    .append(separatorChar)
+							    .append(fileName)
+							    .append(" ")
+							    .append(screenWidth)
+							    .append(",");
 						}
-						el.attr("srcset", srcsetString.toString());
+						el.attr(attrType, srcsetString.toString());
 					}
+				}
+				case "source" -> {
+					attrType = "srcset";
+					StringBuilder srcsetString = new StringBuilder();
+					String fileName = getFileName(el.attr(attrType));
+					File imgDir = new File(mainDir, "images");
+					if (imgDir.mkdir()) {
+						System.out.println("Created directory for images");
+					}
+					File image = new File(imgDir, fileName);
+					String[] srcset = el.attr(attrType).split(",");
+					for (String set : srcset) {
+						String screenWidth = "";
+						if (set.trim().split(" ").length > 1) {
+							screenWidth = set.trim().split(" ")[1];
+						}
+						String setURL = set.trim().split(" ")[0];
+						fileName = getFileName(setURL);
+						image = new File(imgDir, fileName);
+						if (el.attr(attrType).contains("https")) {
+							writeFile(setURL, image);
+						} else if (el.attr(attrType).startsWith("//")) {
+							writeFile("https:" + setURL, image);
+						} else {
+							writeFile(siteUrl + separatorChar + setURL, image);
+						}
+						srcsetString.append("images")
+						    .append(separatorChar)
+						    .append(fileName)
+						    .append(" ")
+						    .append(screenWidth)
+						    .append(",");
+					}
+					el.attr(attrType, srcsetString.toString());
 				}
 
 				default -> {
