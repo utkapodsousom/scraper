@@ -6,8 +6,10 @@ import static java.io.File.separatorChar;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Scanner;
 import org.jsoup.Jsoup;
@@ -69,10 +71,23 @@ public class Scraper {
 						el.attr(attrType, fileName);
 					}
 				}
+				case "script" -> {
+					attrType = "src";
+					if (el.hasAttr(attrType)) {
+						String fileName = getFileName(el.attr(attrType));
+						File scriptsDir = new File(mainDir, "scripts");
+						if (scriptsDir.mkdir()) {
+							System.out.println("Created directory for scripts");
+						}
+						File scriptFile = new File(scriptsDir, fileName);
+						writeFile(el.absUrl(attrType), scriptFile);
+						el.attr(attrType, "scripts" + separatorChar + fileName);
+					}
+				}
 				case "img" -> {
 					attrType = "src";
 					if (el.attr(attrType).isBlank()
-					    || el.attr(attrType).contains("base64")) {
+						|| el.attr(attrType).contains("base64")) {
 						continue;
 					}
 					StringBuilder srcsetString = new StringBuilder();
@@ -104,11 +119,11 @@ public class Scraper {
 								writeFile(siteUrl + separatorChar + setURL, image);
 							}
 							srcsetString.append("images")
-							    .append(separatorChar)
-							    .append(fileName)
-							    .append(" ")
-							    .append(screenWidth)
-							    .append(",");
+								.append(separatorChar)
+								.append(fileName)
+								.append(" ")
+								.append(screenWidth)
+								.append(",");
 						}
 						el.attr(attrType, srcsetString.toString());
 					}
@@ -139,11 +154,11 @@ public class Scraper {
 							writeFile(siteUrl + separatorChar + setURL, image);
 						}
 						srcsetString.append("images")
-						    .append(separatorChar)
-						    .append(fileName)
-						    .append(" ")
-						    .append(screenWidth)
-						    .append(",");
+							.append(separatorChar)
+							.append(fileName)
+							.append(" ")
+							.append(screenWidth)
+							.append(",");
 					}
 					el.attr(attrType, srcsetString.toString());
 				}
@@ -168,22 +183,29 @@ public class Scraper {
 	}
 
 	public static void writeFile(String url, File file) throws IOException, URISyntaxException {
-		try (
-		    BufferedInputStream in = new BufferedInputStream(new URI(url).toURL().openStream()); FileOutputStream fileOutputStream = new FileOutputStream(file);) {
-			byte dataBuffer[] = new byte[1024];
-			int bytesRead;
-			while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
-				fileOutputStream.write(dataBuffer, 0, bytesRead);
+		try {
+			URL fileUrl = new URI(url).toURL();
+			HttpURLConnection connection = (HttpURLConnection) fileUrl.openConnection();
+			connection.setRequestMethod("HEAD");
+			connection.setReadTimeout(5000);
+			int responseCode = connection.getResponseCode();
+			if (responseCode == HttpURLConnection.HTTP_OK) {
+				BufferedInputStream in = new BufferedInputStream(fileUrl.openStream());
+				FileOutputStream out = new FileOutputStream(file);
+				byte dataBuffer[] = new byte[1024];
+				int bytesRead;
+				while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+					out.write(dataBuffer, 0, bytesRead);
+				}
+				in.close();
+				out.close();
 			}
+		} catch (IOException e) {
+			System.err.println("Error writing buffer: " + e.getMessage());
+		} catch (URISyntaxException e) {
+			System.err.println("Invalid URI: " + e.getMessage());
 		} catch (Exception e) {
-			if (e instanceof IOException) {
-				System.err.println("Error writing buffer: " + e.getMessage());
-			} else if (e instanceof URISyntaxException) {
-				System.err.println("Invalid URI: " + e.getMessage());
-			} else {
-				System.err.println("Unknown error: " + e.getMessage());
-			}
+			System.err.println("File unavailable: " + e.getMessage());
 		}
 	}
-
 }
