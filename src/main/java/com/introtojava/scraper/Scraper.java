@@ -177,11 +177,11 @@ public class Scraper {
 			}
 		} catch (Exception e) {
 			if (e instanceof IOException) {
-				System.out.println("Error writing buffer: " + e.getMessage());
+				System.err.println("Error writing buffer: " + e.getMessage());
 			} else if (e instanceof URISyntaxException) {
-				System.out.println("Invalid URI: " + e.getMessage());
+				System.err.println("Invalid URI: " + e.getMessage());
 			} else {
-				System.out.println("Unknown error: " + e.getMessage());
+				System.err.println("Unknown error: " + e.getMessage());
 			}
 		}
 	}
