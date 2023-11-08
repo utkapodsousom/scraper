@@ -23,6 +23,10 @@ import org.jsoup.select.Elements;
  */
 public class Scraper {
 
+	public static final String DIR_IMAGES = "images";
+	public static final String DIR_SCRIPTS = "scripts";
+	public static final String DIR_STYLES = "styles";
+
 	public static void main(String[] args) throws IOException, URISyntaxException {
 		// get site url from user
 		Scanner input = new Scanner(System.in);
@@ -62,13 +66,13 @@ public class Scraper {
 						if (el.attr(attrType).contains("fonts")) {
 							continue;
 						}
-						File stylesDir = new File(mainDir, "styles");
+						File stylesDir = new File(mainDir, DIR_STYLES);
 						if (stylesDir.mkdir()) {
-							System.out.println("Created directory for styles");
+							System.out.println("Created directory for " + DIR_STYLES);
 						}
 						File cssFile = new File(stylesDir, fileName);
 						writeFile(el.absUrl(attrType), cssFile);
-						el.attr(attrType, "styles" + separatorChar + fileName);
+						el.attr(attrType, DIR_STYLES + separatorChar + fileName);
 					} else if (el.absUrl("rel").contains("icon")) {
 						File icon = new File(mainDir, fileName);
 						writeFile(el.absUrl(attrType), icon);
@@ -79,13 +83,13 @@ public class Scraper {
 					attrType = "src";
 					if (el.hasAttr(attrType)) {
 						String fileName = getFileName(el.attr(attrType));
-						File scriptsDir = new File(mainDir, "scripts");
+						File scriptsDir = new File(mainDir, DIR_SCRIPTS);
 						if (scriptsDir.mkdir()) {
-							System.out.println("Created directory for scripts");
+							System.out.println("Created directory for " + DIR_SCRIPTS);
 						}
 						File scriptFile = new File(scriptsDir, fileName);
 						writeFile(el.absUrl(attrType), scriptFile);
-						el.attr(attrType, "scripts" + separatorChar + fileName);
+						el.attr(attrType, DIR_SCRIPTS + separatorChar + fileName);
 					}
 				}
 				case "img" -> {
@@ -96,13 +100,13 @@ public class Scraper {
 					}
 					StringBuilder srcsetString = new StringBuilder();
 					String fileName = getFileName(el.attr(attrType));
-					File imgDir = new File(mainDir, "images");
+					File imgDir = new File(mainDir, DIR_IMAGES);
 					if (imgDir.mkdir()) {
-						System.out.println("Created directory for images");
+						System.out.println("Created directory for " + DIR_IMAGES);
 					}
 					File image = new File(imgDir, fileName);
 					writeFile(el.absUrl(attrType), image);
-					el.attr(attrType, "images" + separatorChar + fileName);
+					el.attr(attrType, DIR_IMAGES + separatorChar + fileName);
 					// TODO: srcset job for <source> tag
 					if (el.hasAttr("srcset")) {
 						attrType = "srcset";
@@ -122,7 +126,7 @@ public class Scraper {
 							} else {
 								writeFile(siteUrl + separatorChar + setURL, image);
 							}
-							srcsetString.append("images")
+							srcsetString.append(DIR_IMAGES)
 								.append(separatorChar)
 								.append(fileName)
 								.append(" ")
@@ -136,9 +140,9 @@ public class Scraper {
 					attrType = "srcset";
 					StringBuilder srcsetString = new StringBuilder();
 					String fileName = getFileName(el.attr(attrType));
-					File imgDir = new File(mainDir, "images");
+					File imgDir = new File(mainDir, DIR_IMAGES);
 					if (imgDir.mkdir()) {
-						System.out.println("Created directory for images");
+						System.out.println("Created directory for " + DIR_IMAGES);
 					}
 					File image = new File(imgDir, fileName);
 					String[] srcset = el.attr(attrType).split(",");
@@ -157,7 +161,7 @@ public class Scraper {
 						} else {
 							writeFile(siteUrl + separatorChar + setURL, image);
 						}
-						srcsetString.append("images")
+						srcsetString.append(DIR_IMAGES)
 							.append(separatorChar)
 							.append(fileName)
 							.append(" ")
