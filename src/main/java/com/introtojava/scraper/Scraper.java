@@ -43,6 +43,10 @@ public class Scraper {
 		File index = new File(mainDir.getAbsolutePath() + separatorChar + "index.html");
 		FileWriter writer = new FileWriter(index);
 		writer.write(html.outerHtml());
+		
+		// close resources
+		input.close();
+		writer.close();
 
 		StringBuilder newHtml = new StringBuilder();
 
