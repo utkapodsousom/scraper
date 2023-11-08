@@ -200,10 +200,10 @@ public class Scraper {
 				in.close();
 				out.close();
 			}
-		} catch (IOException e) {
-			System.err.println("Error writing buffer: " + e.getMessage());
 		} catch (URISyntaxException e) {
 			System.err.println("Invalid URI: " + e.getMessage());
+		} catch (IOException e) {
+			System.err.println("Error writing buffer: " + e.getMessage());
 		} catch (Exception e) {
 			System.err.println("File unavailable: " + e.getMessage());
 		}
