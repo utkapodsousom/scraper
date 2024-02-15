@@ -63,10 +63,7 @@ public class Scraper {
 						if (el.attr(attrType).contains("fonts")) {
 							continue;
 						}
-						File stylesDir = new File(mainDir, DIR_STYLES);
-						if (stylesDir.mkdir()) {
-							System.out.println("Created directory for " + DIR_STYLES);
-						}
+						File stylesDir = createAssetsDirectory(mainDir, DIR_STYLES);
 						File cssFile = new File(stylesDir, fileName);
 						writeFile(el.absUrl(attrType), cssFile);
 						el.attr(attrType, DIR_STYLES + "/" + fileName);
@@ -80,10 +77,7 @@ public class Scraper {
 					attrType = "src";
 					if (el.hasAttr(attrType)) {
 						String fileName = getFileName(el.attr(attrType));
-						File scriptsDir = new File(mainDir, DIR_SCRIPTS);
-						if (scriptsDir.mkdir()) {
-							System.out.println("Created directory for " + DIR_SCRIPTS);
-						}
+						File scriptsDir = createAssetsDirectory(mainDir, DIR_SCRIPTS);
 						File scriptFile = new File(scriptsDir, fileName);
 						writeFile(el.absUrl(attrType), scriptFile);
 						el.attr(attrType, DIR_SCRIPTS + "/" + fileName);
@@ -97,10 +91,7 @@ public class Scraper {
 					}
 					StringBuilder srcsetString = new StringBuilder();
 					String fileName = getFileName(el.attr(attrType));
-					File imgDir = new File(mainDir, DIR_IMAGES);
-					if (imgDir.mkdir()) {
-						System.out.println("Created directory for " + DIR_IMAGES);
-					}
+					File imgDir = createAssetsDirectory(mainDir, DIR_IMAGES);
 					File image = new File(imgDir, fileName);
 					writeFile(el.absUrl(attrType), image);
 					el.attr(attrType, DIR_IMAGES + "/" + fileName);
@@ -137,10 +128,7 @@ public class Scraper {
 					attrType = "srcset";
 					StringBuilder srcsetString = new StringBuilder();
 					String fileName = getFileName(el.attr(attrType));
-					File imgDir = new File(mainDir, DIR_IMAGES);
-					if (imgDir.mkdir()) {
-						System.out.println("Created directory for " + DIR_IMAGES);
-					}
+					File imgDir = createAssetsDirectory(mainDir, DIR_IMAGES);
 					File image = new File(imgDir, fileName);
 					String[] srcset = el.attr(attrType).split(",");
 					for (String set : srcset) {
@@ -179,6 +167,14 @@ public class Scraper {
 		
 		newWriter.write(doc.outerHtml());
 
+	}
+	
+	public static File createAssetsDirectory(File path, String name) {
+		File dirName = new File(path.getAbsolutePath() + separatorChar +name);
+		if (dirName.mkdir()) {
+			System.out.println("Created directory for " + name);
+		}
+		return dirName;
 	}
 
 	public static String getFileName(String url) {
