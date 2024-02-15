@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="ru">
+ <head>
+  <meta charset="UTF-8"><base href="/authorization/">
+  <title>Партнерская сеть LeadRock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Зарабатывай больше в нутра и товарной вертикали вместе с LeadRock! Помогаем вебмастерам благодаря собственным решениям.">
+  <link rel="shortcut icon" href="logo_small.png" type="image/x-icon">
+  <meta property="og:title" content="Партнерская сеть LeadRock">
+  <meta property="og:url" content="https://leadrock.com/">
+  <meta property="og:description" content="Зарабатывай больше в нутра и товарной вертикали вместе с LeadRock! Помогаем вебмастерам благодаря собственным решениям.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Партнерская сеть LeadRock">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:image" content="logo_small.png">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="img/flags/freakflags.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animation.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8.0.0/swiper-bundle.min.css"><!-- VK Pixel -->
+  <script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1842231-bv1Tm"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script>
+  <noscript>&lt;img src="https://vk.com/rtrg?p=VK-RTRG-1842231-bv1Tm" style="position:fixed; left:-999px;" alt=""&gt;
+  </noscript><!-- /VK Pixel -->
+ </head>
+ <body>
+  <nav>
+   <div class="mob_menu">
+    <div class="mob_menu-wrap">
+     <div>
+      <img class="logo" src="img/logo.svg" alt="">
+     </div>
+     <div class="mob_menu-links-wrap">
+      <a class="nav_list-item-change-lang-mob switch-language" href="en" data-lang="en"> Eng </a>
+      <div onclick="openNavMenu()">
+       <img class="burger" src="img/burger.svg" alt="">
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="main-wrapper nav-wrapper-block">
+    <div class="nav-wrapper">
+     <div class="close-button" onclick="closeNavMenu()">
+      <img src="img/nav-cross.svg" alt="">
+     </div>
+     <div class="nav_list">
+      <ul>
+       <a class="nav_list-item" href="#offers">
+        <li>Офферы</li></a> <a class="nav_list-item" href="#solutions">
+        <li>Решения</li></a> <a class="nav_list-item" href="#help">
+        <li>Помощь</li></a> <a class="nav_list-item" href="#rates">
+        <li>Ставки</li></a> <a class="nav_list-item" href="#contacts">
+        <li>Контакты</li></a> <a class="nav_list-item" href="https://blog.leadrock.com/" target="_blank">
+        <li>Blog LeadRock</li></a> <a class="nav_list-item" href="https://tech.leadrock.com/" target="_blank">
+        <li>LeadRock Tech</li></a>
+      </ul>
+     </div>
+     <div class="nav_list">
+      <ul>
+       <a class="nav_list-item-button sign-in" href="/authorize/login">
+        <li>Войти</li></a> <a class="nav_list-item-button registr" href="/authorize/signup">
+        <li>Регистрация</li></a> <a class="nav_list-item-change-lang switch-language" href="en" data-lang="en">
+        <li>Eng</li></a>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </nav>
+  <section class="header">
+   <div class="main-wrapper">
+    <div class="header_left">
+     <div>
+      <img src="img/logo.svg" alt="">
+     </div>
+     <h1>Партнерская<br>
+      сеть</h1>
+     <h4>Зарабатывай с нами -- мы позаботимся об остальном</h4>
+     <p class="header_text">Помогаем вебмастерам зарабатывать больше в нутра и товарной вертикали благодаря нашим решениям.</p>
+    </div>
+    <div class="header_right">
+     <img src="img/header_bg.png" alt="" height="870">
+     <p>Подкасты</p>
+     <p>Программа лояльности</p>
+     <p>LeadRock Tech</p>
+     <p>Нутра и товарные офферы</p>
+     <p>Акции</p>
+     <p>50+ ГЕО</p>
+     <p>Blog LeadRock</p>
+     <p>Социальные сети</p>
+     <p>Кейсы</p>
+     <p>Магазин подарков</p>
+    </div>
+   </div>
+  </section>
+  <section class="offers" id="offers">
+   <div class="main-wrapper">
+    <div class="offers_text">
+     <h2>РАБОТА С ОФФЕРАМИ И ВЫСОКИЕ СТАВКИ</h2>
+     <p>Регулярно добавляем и тестируем новые офферы, чтобы заливать с высоким профитом. Работа с LeadRock позволит забыть о сравнении ставок с&nbsp;другими партнерскими сетями.</p>
+    </div>
+    <div class="swiper offers_slider">
+     <div id="offers-slider" class="swiper-wrapper"></div>
+     <div class="slider_controls">
+      <div class="slider_navigation">
+       <div class="swiper-button-prev">
+        <img src="img/slider-left.svg" alt="">
+       </div>
+       <div class="swiper-button-next">
+        <img src="img/slider-right.svg" alt="">
+       </div>
+      </div>
+      <div class="decoration_line"></div>
+      <div class="slider_pagination">
+       <div class="swiper-pagination"></div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div>
+   </div>
+  </section>
+  <section class="solutions" id="solutions">
+   <div class="main-wrapper">
+    <div class="solutions_left">
+     <div>
+      <img src="img/blog-img.png" alt="">
+      <div>
+       <a href="https://blog.leadrock.com/" target="_blank">Блог</a>
+      </div>
+     </div>
+     <div>
+      <img src="img/lrtech-img.png" alt="">
+      <div>
+       <a href="https://tech.leadrock.com/" target="_blank">LeadRock Tech</a>
+      </div>
+     </div>
+    </div>
+    <div class="solutions_right">
+     <h2>Наши решения</h2>
+     <p>Стараемся быть максимально удобными для вебмастеров. Запустили сервис LeadRock Tech для упрощения работы с техническими инструментами в арбитаже трафика. <br><br>
+       Делимся полезными материалами и кейсами в социальных сетях. Выпустили собственный блог, и теперь экспертного материала стало еще больше!</p>
+    </div>
+   </div>
+  </section>
+  <section class="help" id="help">
+   <div class="main-wrapper">
+    <div class="help_text">
+     <h2>ПОМОЩЬ С ЛЮБЫМИ ВОПРОСАМИ</h2>
+     <p>Хочешь узнать топовый оффер под связку или получить техническую помощь для улучшения работы сервисов? Заболел кот и нужен контакт хорошей ветеринарной клиники? <br><br>
+       Обратись к своему менеджеру, мы ручаемся за его экспертность как в профессиональных, так&nbsp;и&nbsp;житейских вопросах.</p>
+    </div>
+    <div class="help_list">
+     <div class="swiper help_slider">
+      <div class="swiper-wrapper">
+       <div class="help_slider-item swiper-slide">
+        <div class="help_slider-item-container">
+         <img src="img/employees/2.jpg" alt="">
+         <div>
+          <p>Sergey S</p><a href="https://telegram.im/@sergey_leadrock" target="_blank">@sergey_leadrock</a>
+         </div>
+        </div>
+       </div>
+       <div class="help_slider-item swiper-slide">
+        <div class="help_slider-item-container">
+         <img src="img/employees/4.jpg" alt="">
+         <div>
+          <p>Sergey D</p><a href="https://telegram.im/@serg_leadrock" target="_blank">@serg_leadrock</a>
+         </div>
+        </div>
+       </div>
+       <div class="help_slider-item swiper-slide">
+        <div class="help_slider-item-container">
+         <img src="img/employees/5.jpg" alt="">
+         <div>
+          <p>Alex R</p><a href="https://telegram.im/@Alexandr_LeadRock" target="_blank">@Alexandr_LeadRock</a>
+         </div>
+        </div>
+       </div>
+       <div class="help_slider-item swiper-slide">
+        <div class="help_slider-item-container">
+         <img src="img/employees/9.jpg" alt="">
+         <div>
+          <p>Vasiliy</p><a href="https://telegram.im/@Vasiliy_LeadRock" target="_blank">@Vasiliy_LeadRock</a>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="slider_controls">
+       <div class="slider_navigation">
+        <div class="swiper-button-prev">
+         <img src="img/slider-left.svg" alt="">
+        </div>
+        <div class="swiper-button-next">
+         <img src="img/slider-right.svg" alt="">
+        </div>
+       </div>
+       <div class="decoration_line"></div>
+       <div class="slider_pagination">
+        <div class="swiper-pagination"></div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <section class="improvement" id="improvement">
+   <div class="main-wrapper">
+    <div class="improvement_left">
+     <h2>Регулярное улучшение LeadRock</h2>
+     <p>Совершенствуем платформу, чтобы тебе было интереснее и удобнее работать с трафиком. Запустили рейтинг вебмастеров, программу лояльности и магазин подарков.</p>
+    </div>
+    <div class="improvement_right">
+     <div>
+      <img src="img/impr-img.png" alt="">
+     </div>
+     <div class="rotate-icon">
+      <img src="img/rotate-icon_smile.svg" alt="">
+      <div class="rotate-elem">
+       <img src="img/rotate-icon_text.svg" alt="">
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <section class="advertisers">
+   <div class="main-wrapper">
+    <div class="advertisers-left">
+     <div class="adv-slider swiper">
+      <div class="swiper-wrapper">
+       <div class="slide swiper-slide">
+        <div class="adv-slider-item">
+         <div>
+          <div class="flag fflag fflag-PE"></div>
+          <p>D-Norm</p>
+          <p>$18</p>
+         </div><img src="img/offers/dnorm.png" alt="">
+        </div>
+        <div class="adv-slider-item">
+         <div>
+          <div class="flag fflag fflag-MX"></div>
+          <p>Revitaprost</p>
+          <p>$15</p>
+         </div><img src="img/offers/revitaprost.png" alt="">
+        </div>
+       </div>
+       <div class="slide swiper-slide">
+        <div class="adv-slider-item">
+         <div>
+          <div class="flag fflag fflag-MX"></div>
+          <p>Volumin</p>
+          <p>$13</p>
+         </div><img src="img/offers/volumin.png" alt="">
+        </div>
+        <div class="adv-slider-item">
+         <div>
+          <div class="flag fflag fflag-PE"></div>
+          <p>Volumin</p>
+          <p>$16</p>
+         </div><img src="img/offers/volumin.png" alt="">
+        </div>
+       </div>
+       <div class="slide swiper-slide">
+        <div class="adv-slider-item">
+         <div>
+          <div class="flag fflag fflag-GT"></div>
+          <p>El Toro</p>
+          <p>$13</p>
+         </div><img src="img/offers/eltoro.png" alt="">
+        </div>
+        <div class="adv-slider-item">
+         <div>
+          <div class="flag fflag fflag-MX"></div>
+          <p>Alfaman</p>
+          <p>$15</p>
+         </div><img src="img/offers/alfaman.png" alt="">
+        </div>
+       </div>
+       <div class="slide swiper-slide">
+        <div class="adv-slider-item">
+         <div>
+          <div class="flag fflag fflag-MX"></div>
+          <p>Revitaprost</p>
+          <p>$15</p>
+         </div><img src="img/offers/revitaprost.png" alt="">
+        </div>
+        <div class="adv-slider-item">
+         <div>
+          <div class="flag fflag fflag-MX"></div>
+          <p>Keratinorm</p>
+          <p>$15</p>
+         </div><img src="img/offers/keratinorm.png" alt="">
+        </div>
+       </div>
+       <div class="slide swiper-slide">
+        <div class="adv-slider-item">
+         <div>
+          <div class="flag fflag fflag-CO"></div>
+          <p>Amidren</p>
+          <p>$13</p>
+         </div><img src="img/offers/amidren.png" alt="">
+        </div>
+        <div class="adv-slider-item">
+         <div>
+          <div class="flag fflag fflag-MX"></div>
+          <p>Probiomax</p>
+          <p>$13</p>
+         </div><img src="img/offers/probiomax.png" alt="">
+        </div>
+       </div>
+       <div class="slide swiper-slide">
+        <div class="adv-slider-item">
+         <div>
+          <div class="flag fflag fflag-GT"></div>
+          <p>D-norm</p>
+          <p>$27</p>
+         </div><img src="img/offers/dnorm.png" alt="">
+        </div>
+        <div class="adv-slider-item">
+         <div>
+          <div class="flag fflag fflag-MX"></div>
+          <p>Veincontrol</p>
+          <p>$14</p>
+         </div><img src="img/offers/veincontrol.png" alt="">
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="swiper adv-slider-2">
+      <div class="swiper-wrapper">
+       <div class="adv-slider-2-item swiper-slide">
+        <div>
+         <div class="flag fflag fflag-PE"></div>
+         <p>D-Norm</p>
+         <p>$18</p>
+        </div><img src="img/offers/dnorm.png" alt="">
+       </div>
+       <div class="adv-slider-2-item swiper-slide">
+        <div>
+         <div class="flag fflag fflag-MX"></div>
+         <p>Revitaprost</p>
+         <p>$15</p>
+        </div><img src="img/offers/revitaprost.png" alt="">
+       </div>
+       <div class="adv-slider-2-item swiper-slide">
+        <div>
+         <div class="flag fflag fflag-MX"></div>
+         <p>Volumin</p>
+         <p>$13</p>
+        </div><img src="img/offers/volumin.png" alt="">
+       </div>
+       <div class="adv-slider-2-item swiper-slide">
+        <div>
+         <div class="flag fflag fflag-PE"></div>
+         <p>Volumin</p>
+         <p>$16</p>
+        </div><img src="img/offers/volumin.png" alt="">
+       </div>
+       <div class="adv-slider-2-item swiper-slide">
+        <div>
+         <div class="flag fflag fflag-GT"></div>
+         <p>El Toro</p>
+         <p>$13</p>
+        </div><img src="img/offers/eltoro.png" alt="">
+       </div>
+       <div class="adv-slider-2-item swiper-slide">
+        <div>
+         <div class="flag fflag fflag-MX"></div>
+         <p>Alfaman</p>
+         <p>$15</p>
+        </div><img src="img/offers/alfaman.png" alt="">
+       </div>
+       <div class="adv-slider-2-item swiper-slide">
+        <div>
+         <div class="flag fflag fflag-MX"></div>
+         <p>Revitaprost</p>
+         <p>$15</p>
+        </div><img src="img/offers/revitaprost.png" alt="">
+       </div>
+       <div class="adv-slider-2-item swiper-slide">
+        <div>
+         <div class="flag fflag fflag-MX"></div>
+         <p>Keratinorm</p>
+         <p>$15</p>
+        </div><img src="img/offers/keratinorm.png" alt="">
+       </div>
+       <div class="adv-slider-2-item swiper-slide">
+        <div>
+         <div class="flag fflag fflag-CO"></div>
+         <p>Amidren</p>
+         <p>$13</p>
+        </div><img src="img/offers/amidren.png" alt="">
+       </div>
+       <div class="adv-slider-2-item swiper-slide">
+        <div>
+         <div class="flag fflag fflag-MX"></div>
+         <p>Probiomax</p>
+         <p>$13</p>
+        </div><img src="img/offers/probiomax.png" alt="">
+       </div>
+       <div class="adv-slider-2-item swiper-slide">
+        <div>
+         <div class="flag fflag fflag-GT"></div>
+         <p>D-norm</p>
+         <p>$27</p>
+        </div><img src="img/offers/dnorm.png" alt="">
+       </div>
+       <div class="adv-slider-2-item swiper-slide">
+        <div>
+         <div class="flag fflag fflag-MX"></div>
+         <p>Veincontrol</p>
+         <p>$14</p>
+        </div><img src="img/offers/veincontrol.png" alt="">
+       </div>
+      </div>
+     </div>
+     <div class="slider_navigation">
+      <div class="swiper-button-prev">
+       <img src="img/slider-left.svg" alt="">
+      </div>
+      <div class="swiper-button-next">
+       <img src="img/slider-right.svg" alt="">
+      </div>
+     </div>
+    </div>
+    <div>
+     <h2>Прямой <br>
+      рекламодатель</h2>
+     <p>Работаем с прямым рекламодателем. Даём лучшие условия, запускаем прибыльные категории и ГЕО — все&nbsp;тщательно тестируем.</p>
+    </div>
+   </div>
+   <div class="main-wrapper" id="rates">
+    <div class="rates">
+     <h2>Больше не надо думать о ставках</h2>
+     <p>Если ты регулярно льёшь в LeadRock, мы избавим тебя от лишних трат на больших объемах.</p>
+     <div class="rates-compare">
+      <div class="our-rates">
+       <div class="our-rates_header">
+        <span>офферы leadrock<br><br></span> <span>ставка $7</span>
+       </div>
+       <div class="our-rates_points">
+        <div>
+         <img src="img/like.png" alt=""> <span>Переверстка лендинга</span> <span>Бесплатно</span>
+        </div>
+        <div>
+         <img src="img/like.png" alt=""> <span>Корректировка дизайна</span> <span>Бесплатно</span>
+        </div>
+        <div>
+         <img src="img/like.png" alt=""> <span>Топовая<br>
+          связка</span> <span>Бесплатно</span>
+        </div>
+       </div>
+       <div class="our-rates-final">
+        <span>ставка $7</span> <span></span> <span>ставка $7</span>
+       </div>
+      </div>
+      <div class="our-rates another_rates">
+       <div class="our-rates_header">
+        <span>Офферы других <br>
+         партнерок</span> <span>ставка $7.5</span>
+       </div>
+       <div class="our-rates_points">
+        <div>
+         <img src="img/dislike.png" alt=""> <span>Переверстка лендинга</span> <span>Затраты</span>
+        </div>
+        <div>
+         <img src="img/dislike.png" alt=""> <span>Корректировка дизайна</span> <span>Затраты</span>
+        </div>
+        <div>
+         <img src="img/dislike.png" alt=""> <span>Топовая<br>
+          связка</span> <span>Затраты</span>
+        </div>
+       </div>
+       <div class="our-rates-final">
+        <span>ставка $7.5</span> <span></span> <span>ставка $6</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <section class="footer" id="contacts">
+   <div class="main-wrapper">
+    <div class="messengers">
+     <h2>БУДЕМ НА СВЯЗИ</h2>
+     <div class="social_links">
+      <div>
+       <h3>Рекламодателям</h3>
+       <div class="mail">
+        <a href="mailto:Lev@leadrock.com" target="_blank">Lev@leadrock.com</a>
+       </div>
+       <div class="skype">
+        <a href="skype:Lev_440?chat" target="_blank">Lev_440</a>
+       </div>
+       <div class="tg">
+        <a href="https://telegram.im/@leodmi" target="_blank">Leodmi</a>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="content">
+     <div>
+      <img class="logo" src="img/logo.svg" alt="">
+      <h3>Анонсы офферов, кейсы и другие актуальные новости партнерки</h3>
+      <div class="socials">
+       <!--                    <a href="">--> <!--                        <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">--> <!--                            <g id="Facebook">--> <!--                                <g id="Facebook_2">--> <!--                                    <rect class="socials-fill" id="Rectangle" y="0.12793" width="40" height="40" rx="20"--> <!--                                          fill="#7E00CB"/>--> <!--                                    <path id="Vector"--> <!--                                          d="M21.3355 33.4612V21.2972H25.4184L26.0297 16.5567H21.3355V13.53C21.3355 12.1576 21.7166 11.2222 23.6849 11.2222L26.1952 11.221V6.98121C25.7608 6.92365 24.2708 6.79462 22.5373 6.79462C18.918 6.79462 16.4402 9.0037 16.4402 13.0608V16.5568H12.3467V21.2973H16.4401V33.4613L21.3355 33.4612Z"--> <!--                                          fill="white"/>--> <!--                                </g>--> <!--                            </g>--> <!--                        </svg>--> <!--                    </a>--> <!--                    <a href="">--> <!--                        <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">--> <!--                            <g id="Instagram">--> <!--                                <g id="Instagram_2">--> <!--                                    <rect id="Rectangle" class="socials-fill" y="0.12793" width="40" height="40" rx="20"--> <!--                                          fill="#7E00CB"/>--> <!--                                    <path id="Vector"--> <!--                                          d="M15.8345 20.1279C15.8345 17.8268 17.6994 15.9609 20.0005 15.9609C22.3016 15.9609 24.1675 17.8268 24.1675 20.1279C24.1675 22.429 22.3016 24.2949 20.0005 24.2949C17.6994 24.2949 15.8345 22.429 15.8345 20.1279ZM13.5819 20.1279C13.5819 23.6729 16.4555 26.5465 20.0005 26.5465C23.5455 26.5465 26.4191 23.6729 26.4191 20.1279C26.4191 16.5829 23.5455 13.7093 20.0005 13.7093C16.4555 13.7093 13.5819 16.5829 13.5819 20.1279ZM25.1732 13.4548C25.1731 13.7515 25.2609 14.0415 25.4257 14.2883C25.5904 14.535 25.8246 14.7274 26.0986 14.841C26.3727 14.9547 26.6742 14.9845 26.9652 14.9267C27.2562 14.869 27.5236 14.7262 27.7334 14.5165C27.9433 14.3068 28.0863 14.0396 28.1442 13.7487C28.2022 13.4577 28.1727 13.1561 28.0592 12.882C27.9458 12.6078 27.7537 12.3735 27.507 12.2086C27.2604 12.0436 26.9705 11.9555 26.6738 11.9554H26.6732C26.2755 11.9556 25.8942 12.1136 25.6129 12.3948C25.3317 12.6759 25.1735 13.0572 25.1732 13.4548ZM14.9505 30.3026C13.7318 30.2471 13.0694 30.0441 12.6292 29.8726C12.0456 29.6454 11.6292 29.3748 11.1914 28.9376C10.7536 28.5004 10.4826 28.0844 10.2564 27.5008C10.0848 27.0608 9.88179 26.3982 9.82639 25.1795C9.76579 23.8619 9.75369 23.4661 9.75369 20.128C9.75369 16.7899 9.76679 16.3952 9.82639 15.0765C9.88189 13.8578 10.0864 13.1965 10.2564 12.7552C10.4836 12.1716 10.7542 11.7552 11.1914 11.3174C11.6286 10.8796 12.0446 10.6086 12.6292 10.3824C13.0692 10.2108 13.7318 10.0078 14.9505 9.95243C16.2681 9.89183 16.6639 9.87973 20.0005 9.87973C23.3371 9.87973 23.7333 9.89283 25.052 9.95243C26.2707 10.0079 26.932 10.2124 27.3733 10.3824C27.9569 10.6086 28.3733 10.8802 28.8111 11.3174C29.2489 11.7546 29.5189 12.1716 29.7461 12.7552C29.9177 13.1952 30.1207 13.8578 30.1761 15.0765C30.2367 16.3952 30.2488 16.7899 30.2488 20.128C30.2488 23.4661 30.2367 23.8608 30.1761 25.1795C30.1206 26.3982 29.9166 27.0606 29.7461 27.5008C29.5189 28.0844 29.2483 28.5008 28.8111 28.9376C28.3739 29.3744 27.9569 29.6454 27.3733 29.8726C26.9333 30.0442 26.2707 30.2472 25.052 30.3026C23.7344 30.3632 23.3386 30.3753 20.0005 30.3753C16.6624 30.3753 16.2677 30.3632 14.9505 30.3026ZM14.847 7.70363C13.5163 7.76423 12.607 7.97523 11.8129 8.28423C10.9905 8.60333 10.2943 9.03143 9.59859 9.72603C8.90289 10.4206 8.47589 11.1179 8.15679 11.9403C7.84779 12.7349 7.63679 13.6437 7.57619 14.9744C7.51459 16.3072 7.50049 16.7333 7.50049 20.1279C7.50049 23.5225 7.51459 23.9486 7.57619 25.2814C7.63679 26.6122 7.84779 27.5209 8.15679 28.3155C8.47589 29.1374 8.90299 29.8355 9.59859 30.5298C10.2942 31.2241 10.9905 31.6516 11.8129 31.9716C12.6085 32.2806 13.5163 32.4916 14.847 32.5522C16.1805 32.6128 16.6059 32.6279 20.0005 32.6279C23.3951 32.6279 23.8212 32.6138 25.154 32.5522C26.4848 32.4916 27.3935 32.2806 28.1881 31.9716C29.01 31.6516 29.7067 31.2244 30.4024 30.5298C31.0981 29.8352 31.5242 29.1374 31.8442 28.3155C32.1532 27.5209 32.3652 26.6121 32.4248 25.2814C32.4854 23.9476 32.4995 23.5225 32.4995 20.1279C32.4995 16.7333 32.4854 16.3072 32.4248 14.9744C32.3642 13.6436 32.1532 12.7344 31.8442 11.9403C31.5242 11.1184 31.097 10.4217 30.4024 9.72603C29.7078 9.03033 29.01 8.60333 28.1891 8.28423C27.3935 7.97523 26.4847 7.76323 25.155 7.70363C23.8222 7.64303 23.3961 7.62793 20.0015 7.62793C16.6069 7.62793 16.1805 7.64203 14.847 7.70363Z"--> <!--                                          fill="white"/>--> <!--                                </g>--> <!--                            </g>--> <!--                        </svg>--> <!--                    </a>--> <a href="https://t.me/leadrock_network" target="_blank">
+        <svg width="40" height="41" viewbox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <rect y="0.12793" class="socials-fill" width="40" height="40" rx="20" fill="#7E00CB" /> <rect y="0.12793" class="socials-fill" width="40" height="40" rx="20" fill="#7E00CB" /> <path d="M8.98947 19.6871C14.8056 17.0998 18.6839 15.3942 20.6244 14.5701C26.165 12.2171 27.3162 11.8084 28.0666 11.7947C28.2317 11.7919 28.6007 11.8337 28.8397 12.0317C29.0416 12.1989 29.0971 12.4248 29.1237 12.5834C29.1502 12.7419 29.1833 13.1031 29.157 13.3853C28.8568 16.6063 27.5576 24.4228 26.8967 28.0304C26.617 29.5569 26.0664 30.0688 25.5332 30.1189C24.3746 30.2277 23.4949 29.3371 22.3727 28.5861C20.6168 27.4108 19.6248 26.6792 17.9204 25.5324C15.9506 24.2071 17.2275 23.4787 18.3501 22.2882C18.6439 21.9767 23.7486 17.2359 23.8474 16.8058C23.8598 16.7521 23.8712 16.5516 23.7546 16.4457C23.6379 16.3398 23.4657 16.376 23.3415 16.4048C23.1654 16.4456 20.3603 18.3387 14.9261 22.084C14.1299 22.6422 13.4087 22.9142 12.7625 22.9C12.0502 22.8843 10.6799 22.4887 9.66122 22.1507C8.4118 21.736 7.41878 21.5167 7.50525 20.8125C7.55029 20.4457 8.04503 20.0705 8.98947 19.6871Z" fill="white" />
+        </svg></a> <a href="https://vk.com/leadrock" target="_blank">
+        <svg width="40" height="41" viewbox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <circle class="socials-fill" cx="20" cy="20.1279" r="20" fill="#7E00CB" /> <path fill-rule="evenodd" clip-rule="evenodd" d="M18.233 27.6476H19.538C19.538 27.6476 19.9324 27.6025 20.1341 27.3827C20.321 27.181 20.3121 26.8017 20.3121 26.8017C20.3121 26.8017 20.2854 25.0226 21.101 24.7607C21.9018 24.5018 22.9309 26.4796 24.0224 27.2412C24.8469 27.8162 25.4757 27.6898 25.4757 27.6898L28.3941 27.6476C28.3941 27.6476 29.9215 27.5513 29.1978 26.3351C29.1385 26.2358 28.7767 25.435 27.0298 23.7884C25.1998 22.0664 25.446 22.3434 27.6496 19.3632C28.9932 17.5479 29.527 16.4401 29.361 15.9645C29.2008 15.5129 28.2132 15.6333 28.2132 15.6333L24.927 15.6544C24.927 15.6544 24.6838 15.6213 24.5029 15.7297C24.3249 15.838 24.2122 16.0879 24.2122 16.0879C24.2122 16.0879 23.6932 17.4937 22.9992 18.6888C21.537 21.2115 20.9527 21.344 20.7125 21.1874C20.1549 20.8232 20.2943 19.7214 20.2943 18.9387C20.2943 16.4943 20.6591 15.4768 19.5825 15.2119C19.2266 15.1246 18.9626 15.0674 18.0491 15.0584C16.8776 15.0463 15.884 15.0614 15.3235 15.3413C14.9498 15.528 14.6621 15.9404 14.8371 15.9645C15.0536 15.9946 15.5459 16.0999 15.8069 16.4582C16.142 16.9218 16.1331 17.9664 16.1331 17.9664C16.1331 17.9664 16.3259 20.8412 15.6823 21.1995C15.2404 21.4433 14.6324 20.9436 13.3274 18.6557C12.6601 17.4847 12.1559 16.1902 12.1559 16.1902C12.1559 16.1902 12.058 15.9494 11.886 15.82C11.6754 15.6634 11.3818 15.6123 11.3818 15.6123L8.26171 15.6333C8.26171 15.6333 7.7931 15.6454 7.62108 15.8531C7.46685 16.0367 7.60921 16.419 7.60921 16.419C7.60921 16.419 10.0531 22.223 12.8203 25.146C15.3502 27.8252 18.233 27.6476 18.233 27.6476Z" fill="white" />
+        </svg></a> <a href="https://www.youtube.com/channel/UCxSeWjO7ultaZsecaVxai8w" target="_blank">
+        <svg width="40" height="41" viewbox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <g id="YouTube">
+          <g id="YouTube_2">
+           <rect class="socials-fill" id="Rectangle" y="0.12793" width="40" height="40" rx="20" fill="#7E00CB" />
+           <path id="Exclude" fill-rule="evenodd" clip-rule="evenodd" d="M29.7816 11.9113C30.8525 12.1996 31.6968 13.0439 31.9851 14.1148C32.5205 16.0711 32.4999 20.1485 32.4999 20.1485C32.4999 20.1485 32.4999 24.2054 31.9851 26.1617C31.6968 27.2325 30.8525 28.0768 29.7816 28.3651C27.8253 28.88 19.9999 28.88 19.9999 28.88C19.9999 28.88 12.1952 28.88 10.2183 28.3445C9.14744 28.0562 8.30313 27.2119 8.01482 26.1411C7.5 24.2054 7.5 20.1279 7.5 20.1279C7.5 20.1279 7.5 16.0711 8.01482 14.1148C8.30313 13.0439 9.16803 12.179 10.2183 11.8907C12.1746 11.3759 19.9999 11.3759 19.9999 11.3759C19.9999 11.3759 27.8253 11.3759 29.7816 11.9113ZM24.0156 20.1279L17.5082 23.8759V16.38L24.0156 20.1279Z" fill="white" />
+          </g>
+         </g>
+        </svg></a>
+      </div>
+     </div>
+    </div>
+    <div class="container"></div>
+   </div>
+  </section>
+  <section class="copyright">
+   <div class="main-wrapper">
+    <p>© 2018 - 
+     <script>document.write(new Date().getFullYear())</script> Leadrock <br><br>
+      AdvertMedia OÜ, registration number 16642048 address: Harju maakond, Tallinn, Kesklinna linnaosa, Ravi tn 2, 0134</p>
+   </div>
+  </section>
+  <section id="cookie" class="cookie">
+   <div class="main-wrapper">
+    <p>Этот сайт использует cookie для хранения данных. Продолжая использовать этот вебсайт, Вы даете свое согласие на использование cookie в соответствии с <a href="docs/policy_ru.pdf" target="_blank">Политикой&nbsp;обработки&nbsp;персональных&nbsp;данных</a> и <a href="docs/terms_and_conditions.pdf" target="_blank">Правилами&nbsp;использования&nbsp;вебсайта</a>.</p><button id="cookie_agree">Принимаю</button>
+   </div>
+  </section>
+  <script src="js/jquery.min.js"></script>
+  <script src="https://unpkg.com/swiper@8.0.0/swiper-bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    if (window.innerWidth < 767) {
+        function openNavMenu() {
+            $(".nav-wrapper-block").addClass("mobile_nav_list-visible");
+            $(".mob_menu-wrap").css('display', 'none');
+            $(".close-button").css('display', 'block');
+            $('body').css('overflow', 'hidden');
+        }
+
+        function closeNavMenu() {
+            $(".nav-wrapper-block").removeClass("mobile_nav_list-visible");
+            $(".close-button").css('display', 'none');
+            $(".mob_menu-wrap").css('display', 'flex');
+            $('body').css('overflow-y', 'visible');
+        }
+
+        $('.nav_list-item').click(function () {
+            closeNavMenu();
+        });
+    }
+</script><!-- Google Tag Manager -->
+  <noscript>
+   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MXC5N6S" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript><!-- Yandex Metrika -->
+  <script>(function (m, e, t, r, i, k, a) {
+    m[i] = m[i] || function () {
+        (m[i].a = m[i].a || []).push(arguments)
+    };
+    m[i].l = 1 * new Date();
+    k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+})
+(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+ym(50339551, "init", {
+    clickmap: true,
+    trackLinks: true,
+    accurateTrackBounce: true,
+    webvisor: true,
+    ecommerce: "dataLayer"
+});</script>
+  <noscript>
+   <div>
+    <img src="https://mc.yandex.ru/watch/50339551" style="position:absolute; left:-9999px;" alt="">
+   </div>
+  </noscript><!-- Google Analytics -->
+  <script>(function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({
+        'gtm.start':
+            new Date().getTime(), event: 'gtm.js'
+    });
+    var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-MXC5N6S');
+</script><!-- Roistat -->
+  <script>
+    (function (w, d, s, h, id) {
+        w.roistatProjectId = id;
+        w.roistatHost = h;
+        var p = d.location.protocol == "https:" 

@@ -50,9 +50,6 @@ public class Scraper {
 		
 		// close resources
 		input.close();
-		writer.close();
-
-		StringBuilder newHtml = new StringBuilder();
 
 		Document doc = Jsoup.parse(index, "UTF-8", siteUrl);
 		Elements els = doc.getAllElements();
@@ -72,7 +69,7 @@ public class Scraper {
 						}
 						File cssFile = new File(stylesDir, fileName);
 						writeFile(el.absUrl(attrType), cssFile);
-						el.attr(attrType, DIR_STYLES + separatorChar + fileName);
+						el.attr(attrType, DIR_STYLES + "/" + fileName);
 					} else if (el.absUrl("rel").contains("icon")) {
 						File icon = new File(mainDir, fileName);
 						writeFile(el.absUrl(attrType), icon);
@@ -89,7 +86,7 @@ public class Scraper {
 						}
 						File scriptFile = new File(scriptsDir, fileName);
 						writeFile(el.absUrl(attrType), scriptFile);
-						el.attr(attrType, DIR_SCRIPTS + separatorChar + fileName);
+						el.attr(attrType, DIR_SCRIPTS + "/" + fileName);
 					}
 				}
 				case "img" -> {
@@ -106,7 +103,7 @@ public class Scraper {
 					}
 					File image = new File(imgDir, fileName);
 					writeFile(el.absUrl(attrType), image);
-					el.attr(attrType, DIR_IMAGES + separatorChar + fileName);
+					el.attr(attrType, DIR_IMAGES + "/" + fileName);
 					// TODO: srcset job for <source> tag
 					if (el.hasAttr("srcset")) {
 						attrType = "srcset";
@@ -124,10 +121,10 @@ public class Scraper {
 							} else if (el.attr(attrType).startsWith("//")) {
 								writeFile("https:" + setURL, image);
 							} else {
-								writeFile(siteUrl + separatorChar + setURL, image);
+								writeFile(siteUrl + "/" + setURL, image);
 							}
 							srcsetString.append(DIR_IMAGES)
-								.append(separatorChar)
+								.append("/")
 								.append(fileName)
 								.append(" ")
 								.append(screenWidth)
@@ -159,10 +156,10 @@ public class Scraper {
 						} else if (el.attr(attrType).startsWith("//")) {
 							writeFile("https:" + setURL, image);
 						} else {
-							writeFile(siteUrl + separatorChar + setURL, image);
+							writeFile(siteUrl + "/" + setURL, image);
 						}
 						srcsetString.append(DIR_IMAGES)
-							.append(separatorChar)
+							.append("/")
 							.append(fileName)
 							.append(" ")
 							.append(screenWidth)
@@ -175,11 +172,12 @@ public class Scraper {
 					continue;
 				}
 			}
-
-			newHtml.append(el.outerHtml());
 		}
 
-		System.out.println(newHtml.toString());
+		File newHtml = new File(mainDir.getAbsolutePath() + separatorChar + "index2.html");
+		FileWriter newWriter = new FileWriter(newHtml);
+		
+		newWriter.write(doc.outerHtml());
 
 	}
 
